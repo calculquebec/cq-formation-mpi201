@@ -31,8 +31,8 @@ Table des matières
 
 #. :doc:`point-a-point`
 
-   #. Les envois de données
-   #. Les réceptions de données
+   #. Envoyer des données
+   #. Recevoir des données
    #. Éviter les situations d’interblocage
    #. Communications non bloquantes
 
