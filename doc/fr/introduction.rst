@@ -32,11 +32,78 @@ communication entre les processus pour **transférer des données**.
 Des questions à se poser
 ------------------------
 
-- Pourquoi diviser le travail sur plusieurs serveurs?
+- Pourquoi diviser un calcul sur plusieurs serveurs?
 
-  - Pour la possibilité d’accélérer un calcul.
+  - Pour possiblement l’accélérer.
+  - Pour augmenter sa taille et obtenir un résultat en temps raisonnable.
   - À cause de la quantité limitée de mémoire vive sur chaque serveur.
+
+- Quelle stratégie utiliser pour diviser un calcul?
+
+  - Nous verrons cela à la section suivante.
 
 - Comment envoyer et recevoir des données entre les processus?
 
-  - C’est ce que nous allons voir dans les chapitres suivants!
+  - C’est ce que nous allons voir dans les chapitres suivants.
+
+Stratégies de division du calcul
+--------------------------------
+
+La division ou le partitionnement d’un calcul peut se faire selon
+l’espace des itérations ou selon l’espace du modèle à calculer.
+
+Espaces linéaires
+'''''''''''''''''
+
+- Dans le cas d’un calcul impliquant une réduction de termes purement
+  mathématiques (qui ne proviennent pas d’un vecteur de données), les
+  opérations peuvent être divisées également entre les processus. Par exemple,
+  estimer la constante :math:`\pi` au moyen d’une somme de milliards de termes.
+
+  .. figure:: ../images/parallel-reduction_fr.svg
+
+- Dans le cas d’un calcul qui utilise des données provenant d’un vecteur ou qui
+  génère des données à stocker dans un vecteur, les opérations peuvent être
+  divisées également entre les processus, mais il faut garder à l’esprit que
+  des optimisations dépendent de la proximité des données en mémoire.
+
+  .. figure:: ../images/parallel-array-1d_fr.svg
+
+Espaces à deux dimensions
+'''''''''''''''''''''''''
+
+- Dans le cas d’un calcul utilisant des données disposées en deux dimensions,
+  comme des matrices ou des images, on peut diviser l’espace en partitions
+  horizontales, verticales ou en blocs.
+
+  .. figure:: ../images/parallel-array-2d.svg
+
+- Dans le cas d’un calcul utilisant des données d’un espace linéaire, mais qui
+  considère toutes les combinaisons de valeurs, on se retrouve avec un espace
+  de calcul à deux dimensions et, donc, avec les mêmes options de
+  partitionnement que dans la figure ci-dessus.
+
+  .. figure:: ../images/parallel-comb-1dx1d.svg
+
+Modèle gestionnaire-travailleurs
+''''''''''''''''''''''''''''''''
+
+- Dans le cas d’un problème comportant une liste de calculs non uniformes,
+  on voudrait pouvoir distribuer un calcul à la fois à chaque processus
+  disponible. Ce modèle de calcul parallèle comprend :
+
+  - Un gestionnaire, habituellement le premier processus dans un groupe.
+    Ses responsabilités sont :
+
+    - Distribuer des calculs et recevoir les résultats des travailleurs.
+    - Envoyer un message spécial lorsqu’il faut quitter.
+
+  - Des travailleurs, soient les processus restants dans le groupe.
+    Leurs responsabilités sont :
+
+    - Recevoir un calcul à faire et envoyer les résultats au gestionnaire.
+    - Quitter lorsque le gestionnaire envoie un message à cet effet.
+
+  .. figure:: ../images/parallel-manager-workers_fr.svg
+
+Bref, toutes ces stratégies impliquent **l’envoi et la réception de messages**.
