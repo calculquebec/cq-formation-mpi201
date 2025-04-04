@@ -20,10 +20,15 @@ paralléliser un programme s’exécutant sur plusieurs serveurs.
 Machine à mémoire distribuée
 ----------------------------
 
+Une machine à mémoire distribuée est constituée de plusieurs serveurs de
+calcul, communément appelés *nœuds*, qui sont connectés via un réseau de
+haute performance. La mémoire est dite *distribuée*, car les programmes sur un
+serveur ne peuvent pas accéder directement à la mémoire sur un autre serveur.
+
 .. figure:: ../images/distributed-memory-hardware_fr.svg
 
-Des variables en apparence identiques sont en fait des
-**instances totalement différentes dans des processus différents**.
+Dans ce type de machine, des variables en apparence identiques sont en fait
+des **instances totalement différentes dans des processus différents**.
 Par conséquent, il devient nécessaire d’établir un moyen de
 communication entre les processus pour **transférer des données**.
 
