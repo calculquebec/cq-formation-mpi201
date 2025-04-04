@@ -527,14 +527,14 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1"
        width="8"
        height="8"
        x="8"
        y="7.999999" />
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-88"
        width="16"
        height="4"
@@ -548,21 +548,21 @@
        x="107.99999"
        y="49" />
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-8"
        width="8"
        height="8"
        x="24"
        y="7.999999" />
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-8-8"
        width="8"
        height="8"
        x="40"
        y="8.000001" />
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-8-5"
        width="8"
        height="8"
@@ -768,28 +768,28 @@
          y="12.999999"
          style="font-size:4.23333px">op</tspan></text>
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-6"
        width="8"
        height="8"
        x="8"
        y="24.000002" />
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-8-0"
        width="8"
        height="8"
        x="56"
        y="24.000002" />
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-8-8-2"
        width="8"
        height="8"
        x="103.99999"
        y="24.000002" />
     <rect
-       style="fill:#ff55dd;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#e050c0;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill-opacity:1"
        id="rect1-8-5-4"
        width="8"
        height="8"
@@ -998,22 +998,22 @@
          y="29.000002"
          style="font-size:4.23333px">op</tspan></text>
     <path
-       style="fill:none;fill-opacity:1;stroke:#ff55dd;stroke-width:0.5;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#e050c0;stroke-width:0.5;stroke-opacity:1"
        d="m 12,33 c 12,11 47.999998,0 47.999998,0"
        id="path31"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#ff55dd;stroke-width:0.5;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#e050c0;stroke-width:0.5;stroke-opacity:1"
        d="m 12,7.0000004 c 4,-7.00000010889788 16,0 16,0"
        id="path31-71"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#ff55dd;stroke-width:0.5;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#e050c0;stroke-width:0.5;stroke-opacity:1"
        d="m 28,7.0000004 c 4,-7.0000000848408 16,0 16,0"
        id="path31-71-7"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#ff55dd;stroke-width:0.5;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#e050c0;stroke-width:0.5;stroke-opacity:1"
        d="m 44,7.0000004 c 4,-7.00000008484068 16,0 16,0"
        id="path31-71-2"
        sodipodi:nodetypes="cc" />
@@ -1033,12 +1033,12 @@
        id="path31-71-2-8"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#ff55dd;stroke-width:0.5;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#e050c0;stroke-width:0.5;stroke-opacity:1"
        d="m 60,33 c 11.999999,11 48,0 48,0"
        id="path31-1"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#ff55dd;stroke-width:0.5;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#e050c0;stroke-width:0.5;stroke-opacity:1"
        d="m 107.99999,33 c 11.83995,10.759121 47.99999,0 47.99999,0"
        id="path31-7"
        sodipodi:nodetypes="cc" />
