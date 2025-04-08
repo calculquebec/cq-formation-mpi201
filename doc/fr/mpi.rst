@@ -251,6 +251,10 @@ La commande ci-dessus lancerait 120 processus identiques, chacun exécutant
 Exercice #1 - Premier lancement
 '''''''''''''''''''''''''''''''
 
+**Objectif** : exécuter un premier code MPI.
+
+**Instructions**
+
 #. Allez dans le répertoire de l’exercice avec la commande
    ``cd ~/cq-formation-mpi201-main/lab/bonjour``.
 #. Validez les modules et chargez les modules manquants, au besoin :
