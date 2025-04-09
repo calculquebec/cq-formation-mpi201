@@ -57,6 +57,8 @@ Stratégies de division du calcul
 La division ou le partitionnement d’un calcul peut se faire selon
 l’espace des itérations ou selon l’espace du modèle à calculer.
 
+.. _intro-espaces-lineaires:
+
 Espaces linéaires
 '''''''''''''''''
 
