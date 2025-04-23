@@ -36,6 +36,11 @@ Avec ``mpi4py``, on aurait le code suivant :
 
 .. code-block:: python
 
+    if rank == 2:
+        a = 3
+    else:
+        a = None
+
     # bcast(objet: Any, racine: int = 0) -> Any
 
     a = comm.bcast(a, 2)
@@ -53,6 +58,11 @@ effectuant une **distribution** :
 Avec ``mpi4py``, on aurait le code suivant :
 
 .. code-block:: python
+
+    if rank == 2:
+        a = [5, 8, 3, 12]
+    else:
+        a = None
 
     # scatter(envoi: Sequence[Any] | None, racine: int = 0) -> Any
 
@@ -75,6 +85,10 @@ Avec ``mpi4py``, on aurait le code suivant :
     # gather(envoi: Any, racine: int = 0) -> list[Any] | None
 
     b = comm.gather(a, 2)
+
+    if rank == 2:
+        for valeur in b:
+            print(valeur)
 
 Regroupement à tous avec ``allgather``
 ''''''''''''''''''''''''''''''''''''''
@@ -107,6 +121,70 @@ Avec ``mpi4py``, on aurait le code suivant :
     # alltoall(envoi: Sequence[Any]) -> list[Any]
 
     b = comm.alltoall(a)
+
+Division de l’espace de travail
+'''''''''''''''''''''''''''''''
+
+Avant de se lancer avec un exercice, revoyons comment diviser l’espace de
+travail. On se rappelle cette figure vue en
+:ref:`introduction <intro-espaces-deux-dimensions>` :
+
+.. figure:: ../images/parallel-array-2d.svg
+
+Une première stratégie consiste à diviser l’espace de travail en portions plus
+ou moins égales **selon une dimension**.
+
+- Or, puisque la taille ``N`` d’une dimension n’est pas nécessairement un
+  multiple entier de ``nranks``, on ne peut pas faire une division entière de
+  ``N`` par ``nranks`` pour définir une taille unique de portion. On risquerait
+  alors d’oublier des éléments à calculer.
+- Par contre, on peut utiliser ``rank`` et ``rank + 1`` dans le calcul des
+  bornes inférieure et supérieure d’une portion de calcul. Dans l’exemple
+  ci-dessous, la borne supérieure ``fin`` du processus ``rank`` correspond à
+  la borne inférieure ``debut`` du processus ``rank + 1``, donc aucune
+  itération n’est perdue :
+
+  .. code-block:: python
+
+      # Si rank vaut 0 (le premier rang), debut vaut 0
+      debut = rank * N // nranks
+
+      # Si rank vaut nranks-1 (le dernier rang), fin vaut N
+      fin = (rank + 1) * N // nranks
+
+      # Différentes sélections
+      portion_h = matrice[debut:fin, :]  # Quelques lignes
+      portion_v = matrice[:, debut:fin]  # Quelques colonnes
+
+Exercice #4 - Déplacements de données
+'''''''''''''''''''''''''''''''''''''
+
+**Objectif** : partager le calcul d’une multiplication de matrices.
+
+Étant donné que `le produit matriciel
+<https://fr.wikipedia.org/wiki/Produit_matriciel>`__ :math:`A \times B = C`
+peut se calculer colonne par colonne, chaque processus aura la même matrice
+:math:`A` et une portion unique de la matrice :math:`B`, soit un bloc de
+quelques colonnes consécutives de :math:`B`. Les produits partiels seront
+ensuite concaténés horizontalement pour former la matrice résultante :math:`C`.
+
+.. figure:: ../images/parallel-mat-mul.svg
+
+**Instructions**
+
+#. Allez dans le répertoire de l’exercice avec la commande
+   ``cd ~/cq-formation-mpi201-main/lab/mat_mul``.
+#. Dans le fichier ``mat_mul.py``, éditez les lignes avec des ``...``.
+   Essentiellement, le processus racine :
+
+   #. Crée la matrice ``A`` et **diffuse** cette matrice aux autres processus.
+   #. Crée des portions plus ou moins égales de ``B`` dans ``b_list`` et
+      **distribue** une portion à chaque processus.
+   #. **Regroupe** les multiplications partielles dans ``c_list`` et génère la
+      matrice résultante ``C``.
+
+#. Chargez un module ``scipy-stack`` pour avoir accès à Numpy.
+#. Lancez le programme avec deux (2), trois (3) et quatre (4) processus.
 
 Calculs collectifs
 ------------------

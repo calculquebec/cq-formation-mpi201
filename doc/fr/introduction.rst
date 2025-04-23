@@ -76,6 +76,8 @@ Espaces linéaires
 
   .. figure:: ../images/parallel-array-1d_fr.svg
 
+.. _intro-espaces-deux-dimensions:
+
 Espaces à deux dimensions
 '''''''''''''''''''''''''
 
