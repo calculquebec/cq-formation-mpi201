@@ -156,8 +156,8 @@ ou moins égales **selon une dimension**.
       portion_h = matrice[debut:fin, :]  # Quelques lignes
       portion_v = matrice[:, debut:fin]  # Quelques colonnes
 
-Exercice #4 - Déplacements de données
-'''''''''''''''''''''''''''''''''''''
+Exercice #4 - Multiplication de matrices
+''''''''''''''''''''''''''''''''''''''''
 
 **Objectif** : partager le calcul d’une multiplication de matrices.
 
@@ -275,34 +275,111 @@ Avec ``mpi4py``, on aurait le code suivant :
 
     b = comm.allreduce(a, MPI.SUM)
 
-Division de l’espace de travail
--------------------------------
+Division de l’espace de calcul
+''''''''''''''''''''''''''''''
 
 On se rappelle cette figure vue en :ref:`introduction <intro-espaces-lineaires>` :
 
 .. figure:: ../images/parallel-reduction_fr.svg
 
-La première stratégie consiste à diviser l’espace de travail en portions plus
-ou moins égales selon une dimension.
-
-- Or, puisque la taille ``N`` d’une dimension n’est pas nécessairement un
-  multiple entier de ``nranks``, on ne peut pas faire une division entière de
-  ``N`` par ``nranks`` pour définir une taille unique de portion. On risquerait
-  alors d’oublier des éléments à calculer.
-- Par contre, on peut utiliser ``rank`` et ``rank + 1`` dans le calcul des
-  bornes inférieure et supérieure d’une portion de calcul. Dans l’exemple
-  ci-dessous, la borne supérieure ``fin`` du processus ``rank`` correspond à
-  la borne inférieure ``debut`` du processus ``rank + 1``, donc aucune
-  itération n’est perdue :
+- La stratégie qui consiste à diviser l’espace de calcul en portions plus
+  ou moins égales fonctionne encore.
 
   .. code-block:: python
 
-      # Si rank vaut 0 (le premier rang), debut vaut 0
-      debut = rank * N // nranks
+      borne_inf = rank * N // nranks        # borne inférieure
+      borne_sup = (rank + 1) * N // nranks  # borne supérieure
 
-      # Si rank vaut nranks-1 (le dernier rang), fin vaut N
-      fin = (rank + 1) * N // nranks
-
-      # Boucle dans l'intervalle : debut <= k < fin
-      for k in range(debut, fin):
+      # Boucle dans l'intervalle : borne_inf <= k < borne_sup
+      for k in range(borne_inf, borne_sup):
           ...
+
+- Une seconde stratégie consiste à définir une boucle qui débute à ``rank``,
+  effectue des sauts de ``nranks`` et itère jusqu’à la fin de l’espace de
+  calcul. Ainsi, chaque processus débute la boucle à un indice différent.
+
+  .. code-block:: python
+
+      for k in range(rank, N, nranks):
+          ...
+
+Selon le calcul effectué, il se pourrait que l’une de ces deux stratégies donne
+un résultat numérique plus stable.
+
+Exercice #5 - Approximation de :math:`\pi`
+''''''''''''''''''''''''''''''''''''''''''
+
+**Objectif** : diviser le calcul d’une longue série approximant la constante
+:math:`\pi`.
+
+Étant donné :
+
+.. math::
+
+    \pi = 4 \times \frac{\pi}{4} = 4 \times \arctan(1)
+
+Et étant donné `la série de Taylor
+<https://fr.wikipedia.org/wiki/S%C3%A9rie_de_Taylor>`__ :
+
+.. math::
+
+    \arctan(1) = \sum_{k=0}^{\infty} \frac{(-1)^k}{2k + 1}
+
+Il est donc possible d'approximer :math:`\pi` au moyen de :math:`N` termes :
+
+.. math::
+
+    \pi \approx 4 \times \sum_{k=0}^{N - 1} \frac{(-1)^k}{2k + 1}
+
+Avec :
+
+.. math::
+
+    4 \times (-1)^k & = & \: 4 \times (1 - 2 \times (k \bmod 2)) \\\\
+                    & = & \: 4 - 8 \times (k \bmod 2)
+
+Numériquement, l’accumulation des termes doit se faire dans l’ordre inverse,
+c’est-à-dire en commençant par le plus petit des termes, donc avec l’indice
+:math:`k=N-1`. Cela permet d’accumuler avec précision les plus petits termes
+tout en minimisant l’accumulation d’erreurs dans les bits les moins
+significatifs du résultat final.
+
+**Instructions**
+
+#. Allez dans le répertoire de l’exercice avec la commande
+   ``cd ~/cq-formation-mpi201-main/lab/pi``.
+#. Dans le fichier ``pi-sauts.py``, complétez la conversion du programme sériel
+   en programme utilisant MPI.
+
+   #. Utilisez la stratégie qui consiste à **faire des sauts** de ``nranks``
+      dans une boucle débutant à une valeur de ``k`` qui dépend de ``rank``.
+   #. Programmez une réduction des ``somme`` dans la variable ``pi``.
+   #. Lancez le programme avec deux (2), trois (3) et quatre (4) processus et
+      observez la précision de l’approximation de pi.
+
+#. Dans le fichier ``pi-blocs.py``, complétez la conversion du programme sériel
+   en programme utilisant MPI.
+
+   #. Utilisez la stratégie qui consiste à **boucler d’une borne supérieure à
+      une borne inférieure**.
+   #. Programmez une réduction des ``somme`` dans la variable ``pi``.
+   #. Lancez le programme avec deux (2), trois (3) et quatre (4) processus et
+      observez la précision de l’approximation de pi.
+
+#. Éditez à nouveau ``pi-blocs.py`` de sorte à mesurer le temps du calcul
+   parallèle. Voici un exemple où seul le processus racine mesure le temps
+   écoulé :
+
+   .. code-block:: python
+
+      if rank == 0:
+          t1 = MPI.Wtime()
+
+      # Calcul parallèle et communications
+
+      if rank == 0:
+          t2 = MPI.Wtime()
+          print(f'Temps = {t2 - t1:.6f} sec')
+
+   #. Lancez le programme avec deux (2), quatre (4) et huit (8) processus et
+      observez le temps de calcul mesuré.
