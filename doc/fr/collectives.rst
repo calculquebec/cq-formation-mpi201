@@ -183,7 +183,7 @@ ensuite concaténés horizontalement pour former la matrice résultante :math:`C
    #. **Regroupe** les multiplications partielles dans ``c_list`` et génère la
       matrice résultante ``C``.
 
-#. Chargez un module ``scipy-stack`` pour avoir accès à Numpy.
+#. Chargez un module ``scipy-stack`` pour avoir accès à NumPy.
 #. Lancez le programme avec deux (2), trois (3) et quatre (4) processus.
 
 Calculs collectifs
