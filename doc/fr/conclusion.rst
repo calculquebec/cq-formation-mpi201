@@ -93,7 +93,19 @@ La bibliothèque ``mpi4py`` possède d’autres fonctionnalités :
   - Avec ``mpi4py``, les tableaux NumPy peuvent être divisés ou reconstruits
     avec un nombre différent de valeurs pour chaque processus :
 
-    - `MPI.Comm.Scatterv
+    - Avec `MPI.Comm.Scatterv
       <https://mpi4py.readthedocs.io/en/stable/reference/mpi4py.MPI.Comm.html#mpi4py.MPI.Comm.Scatterv>`__
-    - `MPI.Comm.Gatherv
-      <https://mpi4py.readthedocs.io/en/stable/reference/mpi4py.MPI.Comm.html#mpi4py.MPI.Comm.Gatherv>`__
+      et `MPI.Comm.Gatherv
+      <https://mpi4py.readthedocs.io/en/stable/reference/mpi4py.MPI.Comm.html#mpi4py.MPI.Comm.Gatherv>`__.
+    - Ces méthodes ne tiennent pas automatiquement compte du stockage interne
+      des tableaux NumPy, mais seulement de la séquence contiguë de données en
+      mémoire. Il faut donc planifier le stockage interne du tableau NumPy :
+      en mode *C*, les valeurs d’une matrice 2D sont stockées ligne par ligne,
+      alors qu’en mode *Fortran* elles sont stockées colonne par colonne.
+
+      - Pour plus d’information, voir les `strides
+        <https://numpy.org/doc/stable/reference/generated/numpy.ndarray.strides.html>`__.
+
+    - Voir `les exemples
+      <https://github.com/calculquebec/cq-formation-mpi201/tree/main/lab/scatterv>`__
+      dans ``~/cq-formation-mpi201-main/lab/scatterv``.
