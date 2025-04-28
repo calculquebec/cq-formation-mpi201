@@ -19,7 +19,7 @@ Table des matières
 
    #. Machine à mémoire distribuée
    #. Des questions à se poser
-   #. Stratégies de base
+   #. Stratégies de division du calcul
 
 #. :doc:`mpi`
 
@@ -31,8 +31,7 @@ Table des matières
 
 #. :doc:`point-a-point`
 
-   #. Envoyer des données
-   #. Recevoir des données
+   #. Envois et réceptions de données
    #. Éviter les situations d’interblocage
    #. Communications non bloquantes
 
@@ -40,7 +39,6 @@ Table des matières
 
    #. Déplacements de données
    #. Calculs collectifs
-   #. Division de l’espace de travail
 
 #. :doc:`conclusion`
 
