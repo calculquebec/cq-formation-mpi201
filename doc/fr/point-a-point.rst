@@ -89,15 +89,15 @@ Soit le code suivant :
     :emphasize-lines: 2,5
 
     if proc == 0:
-        comm.Send(a, dest=2, tag=10)
+        comm.ssend(a, dest=2, tag=10)
         b = comm.recv(source=2, tag=11)
     elif proc == 2:
-        comm.Send(b, dest=0, tag=11)
+        comm.ssend(b, dest=0, tag=11)
         a = comm.recv(source=0, tag=10)
 
 - La `méthode
-  <https://mpi4py.readthedocs.io/en/stable/reference/mpi4py.MPI.Comm.html#mpi4py.MPI.Comm.Send>`__
-  ``Send()`` est une version sans mémoire tampon, ce qui la rend toujours
+  <https://mpi4py.readthedocs.io/en/stable/reference/mpi4py.MPI.Comm.html#mpi4py.MPI.Comm.ssend>`__
+  ``ssend()`` est une version synchrone de ``send()``, ce qui la rend toujours
   bloquante.
 - Dans le cas ci-dessus, les deux processus attendent que l’autre fasse appel
   à ``recv()``. Bref, ce code est **erroné** et cause un interblocage.
@@ -108,18 +108,18 @@ Soit le code suivant :
 Solution 1
 ''''''''''
 
-On change l’ordre des appels à ``Send()`` et ``recv()`` pour un des deux
+On change l’ordre des appels à ``ssend()`` et ``recv()`` pour un des deux
 processus. Par exemple :
 
 .. code-block:: python
     :emphasize-lines: 5-6
 
     if proc == 0:
-        comm.Send(a, dest=2, tag=10)
+        comm.ssend(a, dest=2, tag=10)
         b = comm.recv(source=2, tag=11)
     elif proc == 2:
         a = comm.recv(source=0, tag=10)
-        comm.Send(b, dest=0, tag=11)
+        comm.ssend(b, dest=0, tag=11)
 
 On peut généraliser la technique à plus de processus :
 
