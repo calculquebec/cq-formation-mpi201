@@ -42,10 +42,10 @@ Défis de parallélisation supplémentaires
 Les codes suivants fonctionnent déjà en mode séquentiel.
 C’est maintenant à vous de les paralléliser avec MPI :
 
-- `Écoulement de chaleur
-  <https://github.com/calculquebec/cq-formation-ecoulement-chaleur>`__
 - `Convolution sur une image
   <https://github.com/calculquebec/cq-formation-convolution/tree/main/defi-mpi>`__
+- `Écoulement de chaleur
+  <https://github.com/calculquebec/cq-formation-ecoulement-chaleur>`__
 - `Problème à N corps
   <https://github.com/calculquebec/cq-formation-nbody>`__
 
